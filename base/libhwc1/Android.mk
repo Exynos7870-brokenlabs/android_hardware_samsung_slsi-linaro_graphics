@@ -24,6 +24,7 @@ COMMON_HEADER_LIBRARIES := libhardware_headers libcutils_headers libbinder_heade
 
 COMMON_C_INCLUDES := \
     $(TOP)/hardware/samsung_slsi-linaro/$(TARGET_SOC_BASE)/include \
+    $(TOP)/hardware/samsung_slsi-linaro/exynos/include \
     $(TOP)/hardware/samsung_slsi-linaro/exynos5/include \
     $(TOP)/hardware/samsung_slsi-linaro/graphics/base/include \
     $(TOP)/hardware/samsung_slsi-linaro/graphics/base/libhwc1 \

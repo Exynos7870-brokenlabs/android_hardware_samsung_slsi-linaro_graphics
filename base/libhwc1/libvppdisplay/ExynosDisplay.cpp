@@ -66,7 +66,7 @@ void ExynosDisplay::dumpConfig(decon_win_config &c)
     }
 }
 
-/*void ExynosDisplay::printDebugInfos(hwc_display_contents_1_t *contents)
+void ExynosDisplay::printDebugInfos(hwc_display_contents_1_t *contents)
 {
     if (contents != NULL) {
         ALOGD("=======================  dump hwc layers ================================");
@@ -93,13 +93,11 @@ void ExynosDisplay::dumpConfig(decon_win_config &c)
                         layer.displayFrame.bottom);
             }
         }
-
         ALOGD("=======================  dump composition info ================================");
         android::String8 result;
         result.clear();
         dumpLayerInfo(result);
         ALOGD("%s", result.string());
-
         ALOGD("=======================  dump MPP config ================================");
         for (size_t i = 0; i < mLayerInfos.size(); i++) {
             ExynosMPPModule *exynosMPP = mLayerInfos[i]->mExternalMPP;
@@ -111,7 +109,6 @@ void ExynosDisplay::dumpConfig(decon_win_config &c)
                         c.yaddr, c.uaddr, c.vaddr, c.rot, c.cacheable, c.drmMode);
                 ALOGD("\tnarrowRgb = %u, acquireFenceFd = %d, releaseFenceFd = %d, mem_type = %u",
                         c.narrowRgb, c.acquireFenceFd, c.releaseFenceFd, c.mem_type);
-
                 for (uint32_t j = 0; j < exynosMPP->mNumAvailableDstBuffers; j++) {
                     buffer_handle_t dst_buf = exynosMPP->mDstBuffers[j];
                     private_handle_t *dst_handle = NULL;
@@ -124,13 +121,11 @@ void ExynosDisplay::dumpConfig(decon_win_config &c)
                         else
                             ALOGD("\tDstBuffer idx(%d) : fd(%d), fd1(%d), fd2(%d)",
                                     j, dst_handle->fd, dst_handle->fd1, dst_handle->fd2);
-
                     } else
                         ALOGD("\t index(%d) MPP DST buff NULL", j);
                 }
             }
         }
-
         ALOGD("=======================  dump window config ================================");
         struct decon_win_config *c = mWinData->config;
         for (size_t i = 0; i <= NUM_HW_WINDOWS; i++) {
@@ -141,18 +136,16 @@ void ExynosDisplay::dumpConfig(decon_win_config &c)
                 ALOGD("fd = %d, fd1 = %d, fd2 = %d, dma = %u "
                         "src_f_w = %u, src_f_h = %u, src_x = %d, src_y = %d, src_w = %u, src_h = %u, "
                         "dst_f_w = %u, dst_f_h = %u, dst_x = %d, dst_y = %d, dst_w = %u, dst_h = %u, "
-                        "format = %u, blending = %u, protection = %u, transparent(x:%d, y:%d, w:%d, h:%d), "
-                        "block(x:%d, y:%d, w:%d, h:%d)",
+                        "format = %u, blending = %u, protection = %u, transparent(x:%d, y:%d, w:%d, h:%d)",
                         c[i].fd_idma[0], c[i].fd_idma[1], c[i].fd_idma[2], c[i].idma_type,
                         c[i].src.f_w, c[i].src.f_h, c[i].src.x, c[i].src.y, c[i].src.w, c[i].src.h,
                         c[i].dst.f_w, c[i].dst.f_h, c[i].dst.x, c[i].dst.y, c[i].dst.w, c[i].dst.h,
                         c[i].format, c[i].blending, c[i].protection,
-                        c[i].transparent_area.x, c[i].transparent_area.y, c[i].transparent_area.w, c[i].transparent_area.h,
-                        c[i].covered_opaque_area.x, c[i].covered_opaque_area.y, c[i].covered_opaque_area.w, c[i].covered_opaque_area.h);
+                        c[i].transparent_area.x, c[i].transparent_area.y, c[i].transparent_area.w, c[i].transparent_area.h;
             }
         }
     }
-}*/
+}
 
 void ExynosDisplay::dumpConfig(decon_win_config &c, android::String8& result)
 {

@@ -684,11 +684,14 @@ void ExynosDisplay::doPreProcessing(hwc_display_contents_1_t* contents)
             }
             if (isScaled(layer))
                 mLayersNeedScaling = true;
+#ifdef GRALLOC_USAGE_DAYDREAM_SINGLE_BUFFER_MODE
             if (h->flags & GRALLOC_USAGE_DAYDREAM_SINGLE_BUFFER_MODE)
                 hasSingleBuffer = true;
+#endif
         }
     }
 
+#ifdef S3CFB_DECON_SELF_REFRESH
     if (mHasSingleBuffer != hasSingleBuffer) {
         if (hasSingleBuffer) {
             selfRefresh = 1;
@@ -703,6 +706,7 @@ void ExynosDisplay::doPreProcessing(hwc_display_contents_1_t* contents)
         mHwc->hwc_ctrl.skip_static_layer_mode = skipProcessing;
         mHwc->hwc_ctrl.skip_m2m_processing_mode = skipProcessing;
     }
+#endif
 }
 
 void ExynosDisplay::allocateLayerInfos(hwc_display_contents_1_t* contents)
@@ -2715,7 +2719,11 @@ void ExynosDisplay::determineBandwidthSupport(hwc_display_contents_1_t *contents
                     supportedInternalMPP->mState = MPP_STATE_ASSIGNED;
                     mLayerInfos[fbIndex]->mInternalMPP = supportedInternalMPP;
                     mLayerInfos[fbIndex]->mDmaType = getDeconDMAType(mLayerInfos[fbIndex]->mInternalMPP);
+#if defined(MAX_DECON_DMA_TYPE)
                     if (mLayerInfos[fbIndex]->mDmaType >= MAX_DECON_DMA_TYPE) {
+#else
+                    if (mLayerInfos[fbIndex]->mDmaType >= IDMA_MAX) {
+#endif
                         ALOGE("getDeconDMAType with InternalMPP for FramebufferTarget failed (MPP type: %d, MPP index: %d)",
                                 mLayerInfos[fbIndex]->mInternalMPP->mType, mLayerInfos[fbIndex]->mInternalMPP->mIndex);
                         mLayerInfos[fbIndex]->mDmaType = 0;

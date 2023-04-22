@@ -68,7 +68,7 @@ void ExynosDisplay::dumpConfig(decon_win_config &c)
     }
 }
 
-void ExynosDisplay::printDebugInfos(hwc_display_contents_1_t *contents)
+/*void ExynosDisplay::printDebugInfos(hwc_display_contents_1_t *contents)
 {
     if (contents != NULL) {
         ALOGD("=======================  dump hwc layers ================================");
@@ -154,7 +154,7 @@ void ExynosDisplay::printDebugInfos(hwc_display_contents_1_t *contents)
             }
         }
     }
-}
+}*/
 
 void ExynosDisplay::dumpConfig(decon_win_config &c, android::String8& result)
 {
